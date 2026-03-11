@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHS Namibia — Better Living | A Health For All Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --green-dark:  #1b4a3f;
+  --green-mid:   #2e7d4e;
+  --blue:        #2a6a9e;
+  --yellow:      #e9b02e;
+  --red:         #c23b2e;
+  --cream:       #f5e8c7;
+  --cream-dark:  #ede0b3;
+  --paper:       #faf6ec;
+  --ink:         #2c2422;
+  --ink-light:   #5a4e46;
+  --white:       #ffffff;
+  --radius:      16px;
+  --shadow:      0 4px 24px rgba(27,74,63,.12);
+  --shadow-lg:   0 12px 48px rgba(27,74,63,.18);
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Nunito',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{padding-left:1.4rem}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ===== TYPOGRAPHY ===== */
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
+h1{font-size:clamp(2.6rem,7vw,5.5rem);line-height:1.05;font-weight:700}
+h2{font-size:clamp(1.8rem,4vw,3rem);line-height:1.15;font-weight:700}
+h3{font-size:clamp(1.3rem,2.5vw,1.9rem);font-weight:600}
+p{margin-bottom:1rem}
+
+/* ===== UTILITY ===== */
+.container{max-width:1200px;margin:0 auto;padding:0 clamp(1rem,4vw,2.5rem)}
+.text-green{color:var(--green-dark)}
+.text-yellow{color:var(--yellow)}
+.text-red{color:var(--red)}
+.text-blue{color:var(--blue)}
+.bg-cream{background:var(--cream)}
+.tag{display:inline-block;padding:.3rem 1rem;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.tag-green{background:var(--green-dark);color:#fff}
+.tag-cream{background:var(--cream);color:var(--green-dark)}
+.divider{width:64px;height:4px;background:var(--yellow);border-radius:4px;margin:1rem 0 1.5rem}
+.divider.center{margin-left:auto;margin-right:auto}
+
+/* ===== NAV ===== */
+.nav{position:sticky;top:0;z-index:999;background:rgba(250,246,236,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--cream-dark);padding:.8rem 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.nav-logo{display:flex;align-items:center;gap:.8rem}
+.nav-logo-text .ahs{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.9rem;color:var(--green-dark);letter-spacing:-.03em}
+.nav-logo-text .namibia{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5rem;color:var(--ink);letter-spacing:.05em}
+.nav-tagline{font-size:.65rem;font-weight:700;letter-spacing:.14em;color:var(--green-dark);text-transform:uppercase;margin-top:-4px}
+.nav-links{display:flex;gap:2rem;list-style:none;padding:0}
+.nav-links a{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);transition:color .2s}
+.nav-links a:hover{color:var(--green-dark)}
+.nav-cta{display:flex;gap:.8rem;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:50px;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;transition:all .25s;cursor:pointer}
+.btn-primary{background:var(--green-dark);color:#fff}
+.btn-primary:hover{background:#132f29;transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-wa{background:#25D366;color:#fff}
+.btn-wa:hover{background:#1ebe59;transform:translateY(-2px)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:.4rem}
+.hamburger span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;background:var(--green-dark)}
+.hero-bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 80% at 80% 50%,rgba(46,125,78,.35) 0%,transparent 70%),
+  radial-gradient(ellipse 40% 60% at 20% 80%,rgba(233,176,46,.15) 0%,transparent 60%),
+  var(--green-dark);
+}
+.hero-grain{position:absolute;inset:0;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");background-size:300px 300px}
+.hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:6rem 1rem 3rem}
+.hero-badge{display:inline-flex;align-items:center;gap:.6rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:.4rem 1.2rem;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:2.5rem;backdrop-filter:blur(8px)}
+.hero-badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--yellow);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+.hero-logo-row{display:flex;align-items:baseline;justify-content:center;gap:.5rem;margin-bottom:.5rem}
+.hero-ahs{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,10vw,8rem);font-weight:700;letter-spacing:-.04em;color:#fff}
+.hero-na{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:400;letter-spacing:.06em;color:rgba(255,255,255,.75)}
+.hero-people{display:flex;justify-content:center;gap:6px;margin:.5rem 0 2.5rem}
+.person{width:32px;height:56px;border-radius:50% 50% 40% 40%;position:relative;transform-origin:bottom center}
+.person::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:60%;height:8px;border-radius:50%;background:rgba(0,0,0,.15)}
+.p1{background:var(--blue)}
+.p2{background:var(--yellow)}
+.p3{background:var(--red)}
+.p4{background:var(--green-mid)}
+.p5{background:rgba(255,255,255,.5)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,3.5vw,2rem);font-weight:400;font-style:italic;color:rgba(255,255,255,.8);margin-bottom:1rem;letter-spacing:.06em}
+.hero-subtitle{font-size:clamp(.85rem,1.5vw,1rem);font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:3rem}
+.hero-btns{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.btn-hero-primary{background:var(--yellow);color:var(--ink);padding:1rem 2.4rem;border-radius:50px;font-size:.9rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;transition:all .25s}
+.btn-hero-primary:hover{background:#f5c038;transform:translateY(-3px);box-shadow:0 12px 32px rgba(233,176,46,.35)}
+.btn-hero-outline{border:2px solid rgba(255,255,255,.4);color:#fff;padding:1rem 2.4rem;border-radius:50px;font-size:.9rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:all .25s}
+.btn-hero-outline:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,.5);font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.scroll-arrow{width:32px;height:32px;border:2px solid rgba(255,255,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:bobble 2s ease-in-out infinite}
+@keyframes bobble{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ===== SECTION STYLES ===== */
+section{padding:5rem 0}
+.section-header{margin-bottom:3.5rem}
+.section-header.center{text-align:center}
+.section-header.center .divider{margin-left:auto;margin-right:auto}
+
+/* ===== VISION & MISSION ===== */
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.vm-card{background:var(--cream);border-radius:var(--radius);padding:3rem;border-left:5px solid var(--green-dark);position:relative;overflow:hidden}
+.vm-card::after{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;background:rgba(27,74,63,.07)}
+.vm-card h3{margin-bottom:.5rem}
+.vm-label{font-size:.65rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--green-mid);margin-bottom:.5rem}
+
+/* ===== BETTER LIVING GUIDE ===== */
+.guide-section{background:var(--green-dark);color:#fff;padding:5rem 0}
+.guide-word{display:flex;gap:0;justify-content:center;margin:2.5rem 0}
+.guide-letter-wrap{display:flex;flex-direction:column;align-items:center;width:clamp(52px,7.5vw,90px)}
+.guide-letter{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:1;transition:transform .2s}
+.guide-letter-wrap:hover .guide-letter{transform:translateY(-6px)}
+.guide-keyword{font-size:clamp(.42rem,.8vw,.65rem);font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-top:.3rem;color:rgba(255,255,255,.65)}
+.gl-b{color:var(--blue)}
+.gl-e1{color:var(--yellow)}
+.gl-t1{color:var(--red)}
+.gl-t2{color:var(--green-mid)}
+.gl-e2{color:var(--yellow)}
+.gl-r{color:var(--blue)}
+.gl-l{color:var(--red)}
+.gl-i1{color:var(--yellow)}
+.gl-v{color:var(--green-mid)}
+.gl-i2{color:var(--blue)}
+.gl-n{color:var(--red)}
+.gl-g{color:var(--yellow)}
+.principles-overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-top:2.5rem}
+.po-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.4rem;transition:all .25s;cursor:pointer}
+.po-card:hover{background:rgba(255,255,255,.14);transform:translateY(-4px);border-color:rgba(255,255,255,.3)}
+.po-num{font-size:.65rem;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.45);text-transform:uppercase;margin-bottom:.25rem}
+.po-name{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.po-desc{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.5}
+.po-letter{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;float:right;margin-left:.5rem;line-height:1}
+
+/* ===== PRINCIPLES DETAIL ===== */
+.principles-section{padding:5rem 0;background:var(--paper)}
+.principle-block{background:#fff;border-radius:20px;padding:clamp(1.5rem,4vw,3rem);margin-bottom:2.5rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.principle-block::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;border-radius:20px 0 0 20px}
+.pb-blue::before{background:var(--blue)}
+.pb-yellow::before{background:var(--yellow)}
+.pb-red::before{background:var(--red)}
+.pb-green::before{background:var(--green-mid)}
+.pb-dgreen::before{background:var(--green-dark)}
+.principle-header{display:flex;align-items:flex-start;gap:1.2rem;margin-bottom:1.8rem}
+.principle-icon{width:60px;height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:#fff;flex-shrink:0}
+.icon-blue{background:var(--blue)}
+.icon-yellow{background:var(--yellow)}
+.icon-red{background:var(--red)}
+.icon-green{background:var(--green-mid)}
+.icon-dgreen{background:var(--green-dark)}
+.principle-num{font-size:.65rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.2rem}
+.principle-body ol,.principle-body ul{margin-bottom:1rem}
+.principle-body li{margin-bottom:.5rem;font-size:.95rem}
+.principle-body strong{color:var(--green-dark)}
+.info-box{background:var(--cream);border-radius:12px;padding:1.5rem;margin:1.2rem 0}
+.info-box.green{background:var(--green-dark);color:#fff}
+.info-box.red{background:#fdf2f2;border-left:4px solid var(--red)}
+.info-box.yellow{background:#fdf9ec;border-left:4px solid var(--yellow)}
+.info-box.blue{background:#f0f5fb;border-left:4px solid var(--blue)}
+.info-box p,.info-box li{font-size:.9rem}
+.info-box.green p,.info-box.green li{color:rgba(255,255,255,.9)}
+.info-box.green strong{color:var(--yellow)}
+.info-box-title{font-weight:800;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem}
+.kcal-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.kcal-table tr{border-bottom:1px solid var(--cream)}
+.kcal-table td{padding:.5rem .3rem}
+.kcal-table td:last-child{font-weight:700;text-align:right}
+.kcal-table .best-row{background:rgba(27,74,63,.08)}
+.kcal-table .best-row td:first-child{color:var(--green-dark);font-weight:700}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.verse-box{background:var(--green-dark);color:#fff;border-radius:12px;padding:1.5rem;margin-top:1.2rem}
+.verse-ref{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--yellow);margin-bottom:.4rem}
+.verse-text{font-size:.9rem;color:rgba(255,255,255,.88);line-height:1.6}
+.avoid-list{columns:2;column-gap:1.5rem}
+.avoid-list li{font-size:.88rem;margin-bottom:.4rem;break-inside:avoid}
+.recommend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem;margin-top:1rem}
+.rec-item{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:.7rem 1rem;font-size:.82rem;font-weight:600}
+.benefit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem}
+.benefit-item{background:var(--cream);border-radius:10px;padding:.8rem 1rem;font-size:.85rem;display:flex;align-items:flex-start;gap:.5rem}
+.benefit-item::before{content:'✦';color:var(--yellow);font-size:.75rem;margin-top:.15rem;flex-shrink:0}
+.vision-list{list-style:none;padding:0}
+.vision-list li{padding:.5rem 0;border-bottom:1px solid var(--cream);font-size:.9rem;display:flex;align-items:flex-start;gap:.7rem}
+.vision-list li::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green-mid);margin-top:.45rem;flex-shrink:0}
+.pray-list{list-style:none;padding:0}
+.pray-list li{padding:.5rem 0;font-size:.9rem;border-bottom:1px solid rgba(255,255,255,.1);display:flex;gap:.7rem}
+.pray-list li::before{content:'🙏';font-size:.8rem}
+.macro-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.macro-card{border-radius:12px;padding:1.2rem;background:var(--cream)}
+.macro-card h4{font-size:.85rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-dark);margin-bottom:.5rem}
+.macro-card p{font-size:.85rem;margin:0}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:1rem}
+.tip-card{background:var(--cream);border-radius:10px;padding:1rem}
+.tip-card h4{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--green-dark);margin-bottom:.4rem}
+.tip-card p,.tip-card li{font-size:.82rem;margin:0}
+
+/* ===== CALCULATORS ===== */
+.calc-section{background:var(--green-dark);padding:5rem 0;color:#fff}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;margin-top:3rem}
+.calc-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:2rem;backdrop-filter:blur(8px)}
+.calc-card h3{color:#fff;margin-bottom:0.3rem;font-size:1.4rem}
+.calc-desc{font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:1.5rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:.4rem}
+.form-group input,
+.form-group select{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:.7rem 1rem;color:#fff;font-family:'Nunito',sans-serif;font-size:.9rem;outline:none;transition:border .2s}
+.form-group input:focus,
+.form-group select:focus{border-color:var(--yellow)}
+.form-group select option{background:var(--green-dark);color:#fff}
+.calc-btn{width:100%;background:var(--yellow);color:var(--ink);border-radius:50px;padding:.8rem;font-size:.85rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-top:.5rem;transition:all .25s}
+.calc-btn:hover{background:#f5c038;transform:translateY(-2px)}
+.calc-result{margin-top:1.2rem;background:rgba(255,255,255,.05);border-radius:12px;padding:1rem 1.2rem;min-height:70px;font-size:.88rem}
+.result-value{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--yellow);line-height:1.1}
+.result-label{font-size:.78rem;color:rgba(255,255,255,.6);margin-top:.2rem}
+.result-detail{font-size:.83rem;color:rgba(255,255,255,.8);margin-top:.5rem}
+.bmi-bar{height:12px;border-radius:6px;background:linear-gradient(to right,#4ade80,#86efac,#fde047,#fb923c,#ef4444);margin:1rem 0;position:relative;overflow:visible}
+.bmi-marker{position:absolute;top:-6px;width:24px;height:24px;background:#fff;border:3px solid var(--green-dark);border-radius:50%;transform:translateX(-50%);transition:left .5s;display:none}
+.result-categories{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top.8rem}
+.rc-item{background:rgba(255,255,255,.06);border-radius:8px;padding:.5rem .8rem;font-size:.75rem}
+
+/* ===== CONTACT / FOOTER ===== */
+.contact-section{background:var(--cream);padding:5rem 0}
+.contact-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:4rem;align-items:start}
+.contact-info h2{margin-bottom:.5rem}
+.contact-details{margin-top:2rem;display:flex;flex-direction:column;gap:1.2rem}
+.contact-item{display:flex;align-items:flex-start;gap:1rem}
+.contact-icon{width:44px;height:44px;border-radius:12px;background:var(--green-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:20px;height:20px;fill:#fff}
+.contact-label{font-size:.65rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-light);margin-bottom:.2rem}
+.contact-value{font-size:.95rem;font-weight:600}
+.contact-value a:hover{color:var(--green-dark)}
+.wa-big{display:flex;align-items:center;gap:.8rem;background:#25D366;color:#fff;border-radius:16px;padding:1.2rem 2rem;font-size:1rem;font-weight:800;margin-top:2rem;transition:all .25s;box-shadow:0 8px 24px rgba(37,211,102,.25)}
+.wa-big:hover{background:#1ebe59;transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.35)}
+.wa-big svg{width:28px;height:28px;fill:#fff;flex-shrink:0}
+.newsletter-box{background:var(--green-dark);color:#fff;border-radius:20px;padding:2.5rem}
+.newsletter-box h3{color:#fff;margin-bottom:.4rem}
+.newsletter-box p{font-size:.9rem;color:rgba(255,255,255,.7);margin-bottom:1.5rem}
+.newsletter-form{display:flex;flex-direction:column;gap:.8rem}
+.newsletter-form input{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:.8rem 1rem;color:#fff;font-family:'Nunito',sans-serif;font-size:.9rem;outline:none;transition:border .2s}
+.newsletter-form input::placeholder{color:rgba(255,255,255,.45)}
+.newsletter-form input:focus{border-color:var(--yellow)}
+.newsletter-form button{background:var(--yellow);color:var(--ink);border-radius:50px;padding:.85rem;font-size:.85rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;transition:all .25s}
+.newsletter-form button:hover{background:#f5c038}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--ink);color:rgba(255,255,255,.6);padding:3rem 0}
+.footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:#fff;letter-spacing:-.02em}
+.footer-brand span{color:var(--yellow)}
+.footer-text{font-size:.8rem;margin-top:.3rem}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap}
+.footer-links a{font-size:.78rem;font-weight:600;transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-note{font-size:.75rem;text-align:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.1);margin-top:1.5rem;color:rgba(255,255,255,.35)}
+
+/* ===== FLOATING WA ===== */
+.wa-float{position:fixed;bottom:1.8rem;right:1.8rem;z-index:1000;background:#25D366;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,.45);animation:float 3s ease-in-out infinite;transition:transform .2s}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.wa-tooltip{position:absolute;right:72px;background:var(--ink);color:#fff;white-space:nowrap;padding:.5rem 1rem;border-radius:50px;font-size:.78rem;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;top:50%;transform:translateY(-50%)}
+.wa-float:hover .wa-tooltip{opacity:1}
+
+/* ===== MOBILE NAV ===== */
+.mobile-menu{display:none;position:fixed;inset:0;z-index:9998;background:var(--paper);flex-direction:column;padding:5rem 2rem 2rem;overflow-y:auto}
+.mobile-menu.open{display:flex}
+.mobile-menu nav{display:flex;flex-direction:column;gap:1.5rem}
+.mobile-menu a{font-size:1.4rem;font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--ink);border-bottom:1px solid var(--cream);padding-bottom:1rem}
+.close-menu{position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;font-size:2rem;cursor:pointer;color:var(--ink)}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.stagger-1{transition-delay:.1s}
+.stagger-2{transition-delay:.2s}
+.stagger-3{transition-delay:.3s}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .vm-grid{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .macro-grid{grid-template-columns:1fr}
+  .avoid-list{columns:1}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta .btn-primary{display:none}
+  .hamburger{display:flex}
+  .hero-people .person{width:24px;height:42px}
+  .guide-keyword{font-size:.55rem}
+  .principles-overview{grid-template-columns:1fr 1fr}
+  .two-col{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .principles-overview{grid-template-columns:1fr}
+  .calc-grid{grid-template-columns:1fr}
+  .result-categories{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== FLOATING WHATSAPP ===== -->
+<a class="wa-float" href="https://wa.me/264811271097" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <span class="wa-tooltip">Chat with us on WhatsApp</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" id="closeMenu">×</button>
+  <nav>
+    <a href="#vision" onclick="closeMobileMenu()">Vision &amp; Mission</a>
+    <a href="#guide" onclick="closeMobileMenu()">Better Living Guide</a>
+    <a href="#principles" onclick="closeMobileMenu()">12 Principles</a>
+    <a href="#calculators" onclick="closeMobileMenu()">Health Calculators</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact Us</a>
+    <a href="https://wa.me/264811271097" target="_blank" style="color:var(--green-mid)">💬 WhatsApp Us</a>
+  </nav>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<header class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo">
+        <div class="nav-logo-text">
+          <div><span class="ahs">AHS</span><span class="namibia">NAMIBIA</span></div>
+          <div class="nav-tagline">A 'Health For All' Project</div>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#vision">Vision</a></li>
+        <li><a href="#guide">Guide</a></li>
+        <li><a href="#principles">12 Principles</a></li>
+        <li><a href="#calculators">Calculators</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="https://wa.me/264811271097" target="_blank" class="btn btn-wa">
+          <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="#contact" class="btn btn-primary">Get Help</a>
+        <button class="hamburger" id="openMenu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content container">
+    <div class="hero-badge">
+      <span>Adventist Health Services Namibia</span>
+    </div>
+    <div class="hero-logo-row">
+      <span class="hero-ahs">AHS</span>
+      <span class="hero-na">NAMIBIA</span>
+    </div>
+    <div class="hero-people">
+      <div class="person p1"></div>
+      <div class="person p2"></div>
+      <div class="person p3" style="transform:scale(1.2)"></div>
+      <div class="person p4"></div>
+      <div class="person p5"></div>
+    </div>
+    <div class="hero-title">A 'Health For All' Project</div>
+    <h1 style="color:#fff;margin-bottom:.5rem">'BETTER LIVING'</h1>
+    <div class="hero-subtitle">Your Complete Guide to Healthful Living</div>
+    <p style="color:rgba(255,255,255,.7);font-size:1.05rem;max-width:540px;margin:0 auto 2.5rem">Promoting HEALTHFUL LIVING and DISCIPLINED LIFESTYLES through 12 proven health principles for communities, churches, families and individuals across Namibia.</p>
+    <div class="hero-btns">
+      <a href="#guide" class="btn-hero-primary">Explore 12 Principles</a>
+      <a href="#calculators" class="btn-hero-outline">Health Calculators</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-arrow">
+      <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VISION & MISSION ===== -->
+<section id="vision" style="background:#fff;padding:5rem 0">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="tag tag-green">About AHS Namibia</span>
+      <h2 style="margin-top:1rem">Our Vision &amp; Mission</h2>
+      <div class="divider center"></div>
+      <p style="max-width:600px;margin:0 auto;color:var(--ink-light)">Adventist Health Services Namibia (AHS-Namibia) is committed to serving every person in our community with complete health care for body, mind and soul.</p>
+    </div>
+    <div class="vm-grid fade-in">
+      <div class="vm-card">
+        <div class="vm-label">Our Vision</div>
+        <h3>Supreme Service to Every Person</h3>
+        <div class="divider"></div>
+        <p>Adventist Health Services Namibia (AHS-Namibia) is determined to render a supreme level of service to our communities, churches, families, and to individuals, through which we can promote and assist in <strong>HEALTHFUL LIVING and DISCIPLINED LIFESTYLES.</strong></p>
+      </div>
+      <div class="vm-card" style="border-left-color:var(--yellow)">
+        <div class="vm-label">Our Mission</div>
+        <h3>Health, Wellness &amp; Social Needs</h3>
+        <div class="divider" style="background:var(--yellow)"></div>
+        <p>Adventist Health Services Namibia (AHS-Namibia) will cater for the Health, Wellness and Social Needs of all its members and people in our community, while every member will equip themselves to follow a <strong>BETTER LIVING Healthful Living Lifestyle.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BETTER LIVING GUIDE OVERVIEW ===== -->
+<section id="guide" class="guide-section">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="tag" style="background:rgba(255,255,255,.15);color:#fff">'BETTER LIVING' – Your Health Expo Guide</span>
+      <h2 style="color:#fff;margin-top:1rem">12 Health Principles</h2>
+      <div class="divider center"></div>
+      <p style="color:rgba(255,255,255,.7);max-width:580px;margin:0 auto">This 'BETTER LIVING' Booklet focuses on 12 HEALTH PRINCIPLES — a hallmark of Adventist Health Services Namibia to share with every member and every person in our community.</p>
+    </div>
+
+    <!-- BETTER LIVING Acrostic -->
+    <div class="guide-word fade-in" role="img" aria-label="BETTER LIVING acronym">
+      <div class="guide-letter-wrap"><div class="guide-letter gl-b">B</div><div class="guide-keyword">Breathing</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-e1">E</div><div class="guide-keyword">Exercise</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-t1">T</div><div class="guide-keyword">Temperance</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-t2">T</div><div class="guide-keyword">Thankful</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-e2">E</div><div class="guide-keyword">Eat Healthy</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-r">R</div><div class="guide-keyword">Rest</div></div>
+      <div class="guide-letter-wrap" style="margin-left:16px"><div class="guide-letter gl-l">L</div><div class="guide-keyword">Living Water</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-i1">I</div><div class="guide-keyword">Inspired</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-v">V</div><div class="guide-keyword">Vision</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-i2">I</div><div class="guide-keyword">In-the-Sun</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-n">N</div><div class="guide-keyword">Nutrition</div></div>
+      <div class="guide-letter-wrap"><div class="guide-letter gl-g">G</div><div class="guide-keyword">God-Centred</div></div>
+    </div>
+
+    <!-- Principles Cards Overview -->
+    <div class="principles-overview fade-in">
+      <a href="#p1" class="po-card" onclick="document.getElementById('p1').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 1</div>
+        <div class="po-letter gl-b">B</div>
+        <div class="po-name">Breathing Exercises</div>
+        <div class="po-desc">Deep Slow Breathing — Every Morning &amp; Evening in Open Air</div>
+      </a>
+      <a href="#p2" class="po-card" onclick="document.getElementById('p2').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 2</div>
+        <div class="po-letter gl-e1">E</div>
+        <div class="po-name">Exercise Daily</div>
+        <div class="po-desc">30–45 Minutes of Brisk / Fast Walking early morning or late afternoon</div>
+      </a>
+      <a href="#p3" class="po-card" onclick="document.getElementById('p3').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 3</div>
+        <div class="po-letter gl-t1">T</div>
+        <div class="po-name">Temperance &amp; Self-Control</div>
+        <div class="po-desc">Exercise Self-control in Everything: Watch what you Eat, Drink, Think, Speak and Do</div>
+      </a>
+      <a href="#p4" class="po-card" onclick="document.getElementById('p4').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 4</div>
+        <div class="po-letter gl-t2">T</div>
+        <div class="po-name">Thankful Heart</div>
+        <div class="po-desc">Always have An Attitude of Gratitude — Be Happy, Thankful, Appreciate, Laugh, Smile</div>
+      </a>
+      <a href="#p5" class="po-card" onclick="document.getElementById('p5').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 5</div>
+        <div class="po-letter gl-e2">E</div>
+        <div class="po-name">Eat Healthy</div>
+        <div class="po-desc">Big Breakfast, Good Lunch, Small Supper: Low in Salt, Reduce Sugar, Reduce Meats</div>
+      </a>
+      <a href="#p6" class="po-card" onclick="document.getElementById('p6').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 6</div>
+        <div class="po-letter gl-r">R</div>
+        <div class="po-name">Rest Sufficiently</div>
+        <div class="po-desc">6–8 hours of sleep every day / At least two 15-minute breaks during the day</div>
+      </a>
+      <a href="#p7" class="po-card" onclick="document.getElementById('p7').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 7</div>
+        <div class="po-letter gl-l">L</div>
+        <div class="po-name">Living Water</div>
+        <div class="po-desc">Drink 2–3 litres water daily / Wash or Bath or Shower daily with clean water</div>
+      </a>
+      <a href="#p8" class="po-card" onclick="document.getElementById('p8').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 8</div>
+        <div class="po-letter gl-i1">I</div>
+        <div class="po-name">Inspired by the Holy Spirit</div>
+        <div class="po-desc">Ask daily for the guidance &amp; control of the Holy Spirit in your Walk &amp; Decision Making</div>
+      </a>
+      <a href="#p9" class="po-card" onclick="document.getElementById('p9').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 9</div>
+        <div class="po-letter gl-v">V</div>
+        <div class="po-name">Vision Orientated</div>
+        <div class="po-desc">Plan in Advance / Have your Goals in place and Action Plans to work towards them</div>
+      </a>
+      <a href="#p10" class="po-card" onclick="document.getElementById('p10').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 10</div>
+        <div class="po-letter gl-i2">I</div>
+        <div class="po-name">In-the-SUN (Sunshine)</div>
+        <div class="po-desc">10–15 minutes in direct sunlight. Use sun protection if longer sun exposure</div>
+      </a>
+      <a href="#p11" class="po-card" onclick="document.getElementById('p11').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 11</div>
+        <div class="po-letter gl-n">N</div>
+        <div class="po-name">Nutritional Diet</div>
+        <div class="po-desc">Balance your diet with Low Fat, High Fibre, High intake of Fruit &amp; Vegetables, ↓Meat</div>
+      </a>
+      <a href="#p12" class="po-card" onclick="document.getElementById('p12').scrollIntoView({behavior:'smooth'})">
+        <div class="po-num">Principle 12</div>
+        <div class="po-letter gl-g">G</div>
+        <div class="po-name">God-Centred</div>
+        <div class="po-desc">Make God part of Every Word, Every Thought, Every Plan/Activity — of your Whole Life</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 12 PRINCIPLES DETAIL ===== -->
+<section id="principles" class="principles-section">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="tag tag-green">In-Depth</span>
+      <h2 style="margin-top:1rem">The Complete BETTER LIVING Guide</h2>
+      <div class="divider center"></div>
+    </div>
+
+    <!-- P1 Breathing -->
+    <div id="p1" class="principle-block pb-blue fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-blue">B</div>
+        <div>
+          <div class="principle-num">Principle 1</div>
+          <h3>Breathing Exercises</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <ol>
+          <li>Through breathing, the body gets its supply of oxygen which is so critical for body-cells to function. <strong>No oxygen, No life. Poor Oxygen, Poor Health.</strong></li>
+          <li>Good Breathing Exercises fill the lungs with more air / oxygen than normal, which increases oxygen levels in the blood and improves life.</li>
+          <li>Do your proper breathing exercises every morning &amp; every evening for <strong>three (3) minutes</strong>, preferably outside in the Open Air.</li>
+          <li>Proper breathing means: use your diaphragm or abdomen. When you inhale your diaphragm should go down and your stomach should expand.</li>
+          <li>Through proper breathing exercises your lungs can be filled with more air, which means <strong>healthier lungs, more oxygen in the blood, better cell function, less chance for illnesses</strong>, and new life to the soul.</li>
+          <li>For proper breathing exercises: Stand with hands behind your head, inhale deep and breathe out slowly. Do it for 2–3 minutes twice a day.</li>
+          <li><strong>Good Advice:</strong> Always sit up straight; stand up straight; walk up straight.</li>
+        </ol>
+        <div class="info-box yellow" style="margin-top:1rem">
+          <div class="info-box-title">Daily Practice</div>
+          <p>Breathe deeply every morning &amp; evening for 3 minutes in the Open Air. Stand straight, hands behind your head — inhale deep, exhale slowly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 Exercise -->
+    <div id="p2" class="principle-block pb-yellow fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-yellow">E</div>
+        <div>
+          <div class="principle-num">Principle 2</div>
+          <h3>Exercise Daily</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <ol>
+          <li>Exercise improves your blood-flow, keeping the body in a healthy state.</li>
+          <li>Exercise improves your mood; Exercise stimulates a <strong>'GOOD' feeling.</strong></li>
+          <li>Exercise promotes better sleep; Exercise helps you manage your weight.</li>
+          <li><strong>Exercise Combats Chronic Illnesses;</strong> Exercise can be family fun!</li>
+          <li>Exercise boosts your energy level; Exercise can improve the libido.</li>
+          <li>What more proof do you want — <strong>Exercise is Life-Saving to Your Body.</strong></li>
+        </ol>
+        <div class="info-box" style="margin-top:1.2rem">
+          <div class="info-box-title">Calorie Burn Guide — On Average, Burn 300–400 kcal Per Day</div>
+          <table class="kcal-table">
+            <tr><td>Squash, Field and Track events</td><td>840 kcal / hr</td></tr>
+            <tr><td>Serious Running</td><td>700 kcal / hr</td></tr>
+            <tr><td>Soccer, Tennis, Jogging, Rugby</td><td>455 kcal / hr</td></tr>
+            <tr><td>Swimming, Home Cycle</td><td>420 kcal / hr</td></tr>
+            <tr><td>Home Gym, Aerobics, Nucleus</td><td>385 kcal / hr</td></tr>
+            <tr><td>Ball games, Roller skates</td><td>350 kcal / hr</td></tr>
+            <tr class="best-row"><td>⭐ Brisk Walk, Volleyball, Table Tennis</td><td>315 kcal / hr</td></tr>
+            <tr><td>Garden work, Golf</td><td>270 kcal / hr</td></tr>
+            <tr><td>Children games, Fishing</td><td>245 kcal / hr</td></tr>
+            <tr><td>Bowling, Housework, Walking</td><td>210 kcal / hr</td></tr>
+            <tr><td>Strolling, Driving car</td><td>175 kcal / hr</td></tr>
+            <tr><td>Ironing, Cooking, Brushing teeth</td><td>140 kcal / hr</td></tr>
+          </table>
+        </div>
+        <div class="info-box green">
+          <strong>Recommendation:</strong> Thirty to forty-five (30–45) Minutes of Brisk Walking are strongly recommended by health experts to achieve your daily goal. Burn the rest of your kcal with your daily routine / tasks.
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 Temperance -->
+    <div id="p3" class="principle-block pb-red fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-red">T</div>
+        <div>
+          <div class="principle-num">Principle 3</div>
+          <h3>Temperance &amp; Self-Control</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <p>Temperance or Self-control is to get rid of everything that is <strong>HARMFUL</strong> and to use wisely that which is <strong>HEALTHFUL</strong> to the body and soul. <strong>WATCH YOUR WEIGHT.</strong> We should also have self-control and discipline in our:</p>
+        <div class="two-col" style="margin:1rem 0">
+          <div class="info-box blue">
+            <div class="info-box-title">Words</div>
+            <p>Speech — the way we speak, words we use, speak at the right time</p>
+          </div>
+          <div class="info-box blue">
+            <div class="info-box-title">Actions</div>
+            <p>Behaviour — abstain from pre-marital sex, harmful substances, etc.</p>
+          </div>
+          <div class="info-box blue">
+            <div class="info-box-title">Emotions</div>
+            <p>Feelings — good sense of humour, be thankful, compassion</p>
+          </div>
+          <div class="info-box blue">
+            <div class="info-box-title">Thoughts</div>
+            <p>Pure, healthy, clean thoughts; Meditate on Christ; etc.</p>
+          </div>
+        </div>
+        <div class="info-box red">
+          <div class="info-box-title">Things Harmful to the Body — <span style="color:var(--red)">LEARN TO SAY NO!</span></div>
+          <p>Alcohol, Drugs, Smoking, Premarital Sex, Violence, Stealing, Suicide, Anger, Depression, Wrong Eating &amp; Drinking habits, Over-working, Harmful Viewing, etc.</p>
+        </div>
+        <div class="info-box yellow" style="margin-top:1rem">
+          <p style="font-style:italic">"Lack of Self-control of our appetite will prove the ruin of thousands. If only we could have conquered on this point, we would have had moral power to gain the victory over every other temptation of Satan."</p>
+        </div>
+        <p style="margin-top:1rem">Life is full of challenges. Sometimes it seems overwhelming and we long for an escape. But choosing alcohol and drugs is no escape at all. Instead, alcohol and drugs become a prison of your own making, one that is very hard to be set free from.</p>
+        <div class="info-box green" style="margin-top:1rem">
+          <strong>Learn to Say NO! to DRUGS, say NO! to ALCOHOL, Say NO! to Addictive Behaviours, say YES! to LIFE.</strong><br><br>
+          <em>David says in 1 Samuel 17:37 — "The Lord who delivered me from the paw of the lion and the paw of the bear will deliver me from the hand of the Philistine." The same God can deliver you from all your weaknesses, yes even substance abuse and your loss of self-control.</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 Thankful Heart -->
+    <div id="p4" class="principle-block pb-green fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-green">T</div>
+        <div>
+          <div class="principle-num">Principle 4</div>
+          <h3>Thankful Heart</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <p>People at home, work or church are many times so unthankful. It is really rare to see an Attitude of Gratitude from spouses, family members, friends and colleagues today. The Bible emphasises the importance of a Thankful Heart.</p>
+        <div class="info-box yellow">
+          <strong>Proverbs 17:22 —</strong> "A joyful heart is good medicine, but a broken spirit drains one's strength."
+        </div>
+        <p style="margin-top:1rem">Many times, people find themselves in a state of Mental and Physical Exhaustion like Stress, Burnout, Anxiety, Depression and other Medical Illnesses because of a Negative Attitude. Such attitude brings many bad symptoms and illnesses on us.</p>
+        <div class="info-box red" style="margin-top:1rem">
+          <div class="info-box-title">Symptoms of a Tense Body</div>
+          <ul>
+            <li>Your heart beats faster, you breathe faster</li>
+            <li>You feel an adrenaline rush, your muscles tighten up</li>
+            <li>Your pupils dilate</li>
+            <li>Illnesses: Hypertension, Diabetes, Sexual Dysfunction, high Cholesterol, Peptic Ulcers, Spastic Colon and many others become very common</li>
+          </ul>
+        </div>
+        <div class="two-col" style="margin-top:1.2rem">
+          <div class="verse-box">
+            <div class="verse-ref">Philippians 4:6</div>
+            <div class="verse-text">Don't worry about anything, but in all your prayers ask God for what you need, always asking him with a thankful heart.</div>
+          </div>
+          <div class="verse-box">
+            <div class="verse-ref">1 Thessalonians 5:18</div>
+            <div class="verse-text">Be thankful in all circumstances. This is what God wants from you in your life in union with Christ Jesus.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 Eat Healthy -->
+    <div id="p5" class="principle-block pb-blue fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-blue">E</div>
+        <div>
+          <div class="principle-num">Principle 5</div>
+          <h3>Eat Healthy</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <p>No Junk Food. We recommend you eat a <strong>Big Breakfast, a Good Lunch and a Small Supper.</strong> With our low energy jobs of today (inactive), two (2) meals a day are many times sufficient for us.</p>
+        <div class="two-col" style="margin-top:1.2rem">
+          <div class="info-box red">
+            <div class="info-box-title">AVOID or REDUCE DRASTICALLY</div>
+            <ol class="avoid-list" style="columns:1">
+              <li>Salt Intake (keep it as low as possible)</li>
+              <li>Take-aways / Fast Foods (Burgers, Pizzas, Chips, Hotdogs, etc.)</li>
+              <li>Organ Meat (Liver, Kidney, Tongue, Brain, etc.)</li>
+              <li>Meat Intake (Beef, Lamb, Game, Sausage, etc.)</li>
+              <li>Baked or Grilled food in Oil (Fried foods, Food baked in oil)</li>
+              <li>Eggs (Not more than 3 per week or avoid)</li>
+              <li>Cream &amp; Ice-cream (Especially deserts that contain it)</li>
+              <li>Poultry like Chicken, etc.</li>
+              <li>Pork meat and processed meat</li>
+              <li>Cheese</li>
+              <li>Butter &amp; Margarine</li>
+              <li>Full cream Milk</li>
+              <li>Chocolates</li>
+              <li>Cakes &amp; Biscuits, Cookies</li>
+              <li>Alcohol &amp; Smoking</li>
+            </ol>
+          </div>
+          <div class="info-box green">
+            <div class="info-box-title">USE MORE — Strongly Recommended</div>
+            <div class="recommend-grid">
+              <div class="rec-item">🌾 Bran / Fibre &amp; Oats</div>
+              <div class="rec-item">🫘 Beans &amp; Lentils</div>
+              <div class="rec-item">🌽 Maize &amp; Rice (all forms)</div>
+              <div class="rec-item">🥦 Fruit &amp; Vegetables</div>
+              <div class="rec-item">🫒 Olives &amp; Olive Oil</div>
+              <div class="rec-item">🥑 Avocado</div>
+              <div class="rec-item">🌱 Canola Oil</div>
+              <div class="rec-item">🌻 Flaxseed &amp; Almonds</div>
+              <div class="rec-item">🌾 Whole Wheat &amp; Grains</div>
+              <div class="rec-item">💧 2–2½L Pure Water / day</div>
+              <div class="rec-item">🏃 Exercise Daily</div>
+              <div class="rec-item">😄 A lot of Laughing</div>
+            </div>
+            <p style="margin-top:1rem;font-size:.82rem"><strong>No Cooldrinks, Little Juice, Little Meat.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P6 Rest -->
+    <div id="p6" class="principle-block pb-yellow fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-yellow">R</div>
+        <div>
+          <div class="principle-num">Principle 6</div>
+          <h3>Rest Sufficiently</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <p>This is one of the principles in which many of us need some discipline. Be regular and consistent in your Rising and Retiring; Be on time with your Mealtimes; Make sure you have your daily Devotional time; Make sufficient time for Study; Have your daily Outdoor Exercises; and Rest Sufficiently.</p>
+        <p>All of the body needs rest. We spend one third of our time sleeping, usually <strong>6–8 hours every day.</strong> Adequate sleep is essential to brain health; it also gives your brain the restorative breaks it needs to function at an optimal level. Adequate sleep also has a positive influence on the brain, the mood, your mental health, the pulse, blood sugar levels, blood pressure, body function, muscle tone, breathing and digestion.</p>
+        <div class="two-col" style="margin-top:1.2rem">
+          <div class="info-box red">
+            <div class="info-box-title">🚫 Factors that PREVENT Good Sleep</div>
+            <ul>
+              <li>Eating heavy foods late in the day</li>
+              <li>Coffee, tea, alcohol</li>
+              <li>Heavy exercise late in the day</li>
+              <li>Anger, worry, over-thinking, anxiety</li>
+              <li>Going to bed too late</li>
+              <li>Drugs</li>
+            </ul>
+          </div>
+          <div class="info-box" style="background:#f0faf5;border-left:4px solid var(--green-mid)">
+            <div class="info-box-title" style="color:var(--green-mid)">✅ Things that PROMOTE Good Sleep</div>
+            <ul>
+              <li>A regular schedule</li>
+              <li>Breathing exercise, sunshine, physical exercise</li>
+              <li>Fresh air and good nutrition</li>
+              <li>Evening routine, a warm shower</li>
+              <li>A warm non-alcoholic, non-caffeine drink</li>
+              <li>A quiet, well-ventilated room</li>
+              <li>Reading God's Word and Praying before bed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P7 Living Water -->
+    <div id="p7" class="principle-block pb-red fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-red">L</div>
+        <div>
+          <div class="principle-num">Principle 7</div>
+          <h3>Living Water</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <div class="info-box blue" style="margin-bottom:1.2rem">
+          <strong>Key Fact:</strong> Our body consists of 70% water. If we don't maintain that we will feel tired, get dehydrated, drowsy, headaches, will have poor digestion. We will many times just feel sick and irritable.
+        </div>
+        <div class="benefit-grid">
+          <div class="benefit-item">Water assists with getting rid of toxins (poisons) from our bodies through kidneys and sweating</div>
+          <div class="benefit-item">Water helps with normal functioning of the colon/bowels — keeps it clean</div>
+          <div class="benefit-item">Water keeps the blood pure and helps with the transport for oxygen and nutrients to cells</div>
+          <div class="benefit-item">Water cushions our body joints</div>
+          <div class="benefit-item">Water helps regulate body temperature</div>
+          <div class="benefit-item">Water helps the body not to form blood clots</div>
+          <div class="benefit-item">Water helps with normal kidney function</div>
+          <div class="benefit-item">Water lowers incidence of bladder infections and helps with chronic headaches</div>
+        </div>
+        <div class="info-box green" style="margin-top:1.2rem">
+          <strong>Daily Recommendation:</strong> Drink 2–3 litres of water per day (or 2 glasses for every 15kg body weight). Best water: Spring water / Mineral water / Reverse Osmosis / Filter water / Tap water. <strong>WATER IS FOR CLEANSING.</strong>
+        </div>
+        <div class="info-box red" style="margin-top:1rem">
+          <div class="info-box-title">⚠️ Very Important: DON'T DRINK AND EAT</div>
+          <p>The water dilutes the digestive juices/acids that break down food. Digestion will take much longer. So, fluids only <strong>½ hour before meals and 1 hour after meals</strong> please.</p>
+        </div>
+        <div class="info-box yellow" style="margin-top:1rem">
+          <div class="info-box-title">Common Illnesses from Poor Water Intake</div>
+          <p>Headaches, Constipation, Skin problems, Tiredness, Indigestion, Bladder infection; and the list can go on.</p>
+        </div>
+        <div class="info-box" style="margin-top:1rem;background:#f0f5fb;border-left:4px solid var(--blue)">
+          <div class="info-box-title">External Benefits of Water</div>
+          <p>Cleanliness, open pores on skin, water/hydro therapy (cold and hot) improves circulation and helps with colds, flu, arthritis, wounds, encourages healing, and many others.</p>
+        </div>
+        <div class="info-box red" style="margin-top:1rem">
+          <strong>⚠️ NEVER LEAVE PLASTIC WATER BOTTLES IN CAR OR IN SUN.</strong> Water in plastic bottles is not too safe especially when exposed to heat/sun. The chemicals in plastic can cause harm to our bodies.
+        </div>
+      </div>
+    </div>
+
+    <!-- P8 Holy Spirit -->
+    <div id="p8" class="principle-block pb-green fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-green">I</div>
+        <div>
+          <div class="principle-num">Principle 8</div>
+          <h3>Inspired by the Holy Spirit</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <p>A Complete Health Reform is much needed in our lives today. Inspiration is needed to get up and improve your life. Inspiration is needed to learn new habits and to follow a better lifestyle. Inspiration is needed to apply new health principles in our lives.</p>
+        <div class="info-box yellow">
+          <strong>Many times our own inspiration only makes us stick to our new habits and better lifestyle for three (3) weeks, then we are back to where we were.</strong>
+        </div>
+        <p style="margin-top:1rem">My dear friend, Allow the Holy Spirit to inspire you to take control of your Complete Health. Remember, <strong>Holy Spirit Driven Decisions are Lasting Decisions.</strong></p>
+        <div class="info-box green" style="margin-top:1rem">
+          <strong>The power that drives you is the power that rules you. Let your life be Holy-Spirit driven.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- P9 Vision -->
+    <div id="p9" class="principle-block pb-blue fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-blue">V</div>
+        <div>
+          <div class="principle-num">Principle 9</div>
+          <h3>Vision Orientated</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <p>What does it mean to be Vision-minded? It means:</p>
+        <ul class="vision-list">
+          <li>Always ask yourself, Where Are You Going</li>
+          <li>Always ask yourself, What Do You Want To Become</li>
+          <li>Always have your Goals in place and work towards them</li>
+          <li>To Maintain a supreme level of SPIRITUALITY</li>
+          <li>To Live for Christ; No love of money — NOT Being MATERIALISTIC</li>
+          <li>To have Wisdom from God. Intellect is meaningless if God is not in it.</li>
+          <li>To be Filled with the FRUIT OF THE SPIRIT; Galatians 5:22</li>
+          <li>To Practice true Christianity — PRACTICE WHAT WE PREACH</li>
+        </ul>
+        <div class="info-box yellow" style="margin-top:1.2rem">
+          <strong>Being vision-minded means to have a Dream, Get your Objectives, Draw up your action plans, Start → Monitor → Evaluate → Complete your goal. This is true success. This is being Vision-minded.</strong>
+        </div>
+        <p style="margin-top:1rem">Yes, it is true that You will get tired along the way; Many times you will feel lonely; You will get discouraged; You will feel like giving up; You will look for shortcuts; A time will come that You will hope it rains money; You will feel God is not there; But hold on, <strong>Through Jesus Christ you can Accomplish your goals.</strong></p>
+        <p>This information-filled booklet will encourage you to reach your health goals. <strong>Go for it!</strong></p>
+      </div>
+    </div>
+
+    <!-- P10 Sunshine -->
+    <div id="p10" class="principle-block pb-yellow fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-yellow">I</div>
+        <div>
+          <div class="principle-num">Principle 10</div>
+          <h3>In-the-SUN (Sunshine)</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <div class="info-box-title" style="margin-bottom:.8rem">BENEFITS OF SUNLIGHT:</div>
+        <div class="benefit-grid">
+          <div class="benefit-item">Elevates and lifts our spirits, helping us to overcome depression</div>
+          <div class="benefit-item">Kills germs and keeps things fresh; deodorizes</div>
+          <div class="benefit-item">Aids in keeping the skin healthy</div>
+          <div class="benefit-item">Source of <strong>VITAMIN D</strong> (most Namibians have a Vit D Deficiency)</div>
+          <div class="benefit-item">Regulates temperature, humidity &amp; wind on earth</div>
+          <div class="benefit-item">Stimulates the immune system</div>
+          <div class="benefit-item">Aids in plant growth</div>
+          <div class="benefit-item">Provides energy for the whole world</div>
+          <div class="benefit-item">Lowers harmful LDL cholesterol</div>
+          <div class="benefit-item">Lowers high blood pressure</div>
+          <div class="benefit-item">Stabilizes blood sugar level</div>
+        </div>
+        <div class="info-box blue" style="margin-top:1.2rem">
+          <p>Your body produces vitamin D naturally when it's directly exposed to sunlight. Vitamin D helps to regulate the absorption of Calcium and Phosphate, it fights inflammation and disease, it regulates the mood, can help with weight-loss.</p>
+        </div>
+        <div class="info-box red" style="margin-top:1rem">
+          <strong>⚠️ Caution:</strong> Getting Too Much Sunlight is a Risk factor for skin cancer. Use a good sun screen with an SPF (sun-screen protection factor) of 8 or greater. Umbrellas, hats, sunglasses and long-sleeved clothing all help to protect the skin from over exposure.
+        </div>
+        <div class="info-box green" style="margin-top:1rem">
+          <strong>How Much Sunlight Do You Need?</strong> One should get an average of <strong>10–15 minutes of sunlight each day</strong>, during the hours before midmorning and after late afternoon. Darker skinned people need 30–60 minutes. Sunshine does not pass through glass. One must be in direct sunlight. Vit D Supplement is OK.
+        </div>
+      </div>
+    </div>
+
+    <!-- P11 Nutritional Diet -->
+    <div id="p11" class="principle-block pb-red fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-red">N</div>
+        <div>
+          <div class="principle-num">Principle 11</div>
+          <h3>Nutritional Diet</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <p>The essential "big 4" nutrients (macronutrients) in our diet are Proteins, Carbohydrates, Fats and Liquids. And since there are both unhealthy and healthy eating choices for each of the four, here's how to choose wisely:</p>
+        <div class="macro-grid">
+          <div class="macro-card">
+            <h4>1. Healthy Protein</h4>
+            <p>Comes from quality high protein foods. Good choices are Beans, Lentils, Peas, Low-fat yogurt, cheese and other low-fat dairy, eggs and nuts. Choose mainly lean chicken (without the skin) and omega 3 fish. Bake, broil or grill your poultry and fish to stay lean and healthy.</p>
+          </div>
+          <div class="macro-card">
+            <h4>2. Healthy Fats</h4>
+            <p>Have fat-soluble vitamins and essential fatty acids. Choose 100% whole grains, nuts, seeds and omega 3 fish. Use olive oil for salads and cooking. Keep saturated fats like meat and dairy low, your good fats at around 25% of calories and eliminate all trans-fats from diet.</p>
+          </div>
+          <div class="macro-card">
+            <h4>3. Healthy Carbohydrates</h4>
+            <p>Generally complex carbohydrates that have a low glycaemic index. Healthy carbs include fresh vegetables like raw carrots, red peppers, broccoli, kale, green leafy veggies and other high fibre foods like raw fruits, beans and healthy whole grains like brown rice, rolled oats, 100% whole wheat pasta, breads and crackers, plus low fat dairy. Avoid high glycaemic carbs.</p>
+          </div>
+          <div class="macro-card">
+            <h4>4. Healthy Liquids</h4>
+            <p>Water is an essential nutrient involved in every function of your body, including healthy digestion and elimination. Since water makes up two-thirds of your body, pure water is the best liquid to drink. Avoid sodas, fruit juice and other sweet drinks and limit alcohol and coffee.</p>
+          </div>
+        </div>
+        <div class="info-box green" style="margin-top:1.5rem">
+          <div class="info-box-title">A Few Good Tips for Healthy Eating</div>
+          <div class="tips-grid">
+            <div class="tip-card" style="background:rgba(255,255,255,.1)">
+              <h4 style="color:var(--yellow)">💧 Water / Fluids</h4>
+              <p style="color:rgba(255,255,255,.85)">2–2½ litres water per day. Purified or Boiled water is best. Chamomile tea, Green tea, Carrot juice, Tomato juice — excellent choices.</p>
+            </div>
+            <div class="tip-card" style="background:rgba(255,255,255,.1)">
+              <h4 style="color:var(--yellow)">🌾 High Fibre</h4>
+              <p style="color:rgba(255,255,255,.85)">Vegetables &amp; Salads (with skin), Fruit (with skin), Oats, Muesli, Legumes 2–4 times/week, Brown rice, Whole wheat pasta, Nuts &amp; Seeds</p>
+            </div>
+            <div class="tip-card" style="background:rgba(255,255,255,.1)">
+              <h4 style="color:var(--yellow)">⚠️ Reduce</h4>
+              <p style="color:rgba(255,255,255,.85)">Pizzas, Pastas, White bread, White rice, Sugar &amp; Sugar products. Never use milk and sugar together.</p>
+            </div>
+            <div class="tip-card" style="background:rgba(255,255,255,.1)">
+              <h4 style="color:var(--yellow)">🚫 Avoid</h4>
+              <p style="color:rgba(255,255,255,.85)">Coffee, Cola Drinks, Tea (only black rooibos tea allowed), Caffeine products. Organs (Liver, kidney, Brain, Tongue, etc.)</p>
+            </div>
+            <div class="tip-card" style="background:rgba(255,255,255,.1)">
+              <h4 style="color:var(--yellow)">🍽️ Meals</h4>
+              <p style="color:rgba(255,255,255,.85)">Big Breakfast, Good Lunch. Skip supper if over 70 years or have something very light (Toast, fruit, etc.)</p>
+            </div>
+            <div class="tip-card" style="background:rgba(255,255,255,.1)">
+              <h4 style="color:var(--yellow)">🏃 Exercise</h4>
+              <p style="color:rgba(255,255,255,.85)">Very, very important for the bowel system; it also releases STRESS on colon. Do 4 km of walking every day or 2nd day or any equivalent exercise.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P12 God-Centred -->
+    <div id="p12" class="principle-block pb-dgreen fade-in">
+      <div class="principle-header">
+        <div class="principle-icon icon-dgreen">G</div>
+        <div>
+          <div class="principle-num">Principle 12</div>
+          <h3>God-Centred</h3>
+        </div>
+      </div>
+      <div class="principle-body">
+        <p>We should make God part of every single plan in/of your life. A God-centred life means that EVERYTHING, yes, EVERYTHING belongs to the Lord. This includes our bodies, our minds, our tongues, our hands and feet, the money we possess, the vehicles we drive, the jobs we have, the clothes we wear, the friends we have, the time we have, the parents we have, the church we belong to, etc... <strong>EVERYTHING belongs to the Lord.</strong></p>
+        <p>Therefore, we should treat everything, <strong>especially our bodies</strong> with the utmost respect and care — because we know it doesn't belong to us. It belongs to the Lord! (1Cor 3:16,17)</p>
+        <div class="two-col" style="margin:1.2rem 0">
+          <div class="verse-box">
+            <div class="verse-ref">1 Corinthians 6:19,20</div>
+            <div class="verse-text">"You are bought with a price. So, use your bodies for God's glory."</div>
+          </div>
+          <div class="verse-box">
+            <div class="verse-ref">Isaiah 43:1</div>
+            <div class="verse-text">"I have called you by name — you are mine, says the Lord."</div>
+          </div>
+        </div>
+        <p>We will realize that the common question that arises many times is where do I start to live a "Christ-centred life." It should start with me — reading my Bible, saying the right words at the right time, going to church, singing the right songs and praying the right prayers. When I start with Jesus, I can let the knowledge of who He is and what He has done, work its way to me. Don't get me wrong, being a Christian is a life marked by hard and dedicated work, and struggling. But before, within, and after all the work and struggle, we rest in God. We are comforted as we mourn. We are joyful in our sorrow. Why? Because the blood Jesus bled was bled on our behalf, the life Jesus lived was lived in our place, the death Jesus died was for our sin, and the power of God that raised Christ from the dead will resurrect all who believe. (see 1 Cor 5:21, Col 1:27)</p>
+        <div class="info-box yellow" style="margin-top:1.2rem">
+          <p>When we borrow a friend's car — maybe it's a really nice car — we treat it with great respect because we don't want something bad to happen to it while it is in our possession. Well, this same principle applies to the things of the Lord. We are stewards and managers of these things, including our Health. <strong>While He gave Life to us, let us give our Good Health back to Him.</strong></p>
+        </div>
+        <div class="info-box green" style="margin-top:1rem">
+          <div class="info-box-title">Pray About:</div>
+          <ul class="pray-list">
+            <li>Wisdom and strength to follow a Healthy Lifestyle</li>
+            <li>Victory over addictions, weaknesses and battles in your life</li>
+            <li>A life partner. Ask God for direction and His leading.</li>
+            <li>A home you are considering to buy or rent. God's perfect will.</li>
+            <li>A job.</li>
+            <li>Any major financial crisis or financial decision you are about to make.</li>
+          </ul>
+        </div>
+        <div class="info-box" style="background:var(--green-dark);color:#fff;margin-top:1.5rem;text-align:center;padding:2rem">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:var(--yellow)">— NOW YOU CAN HAVE A 'BETTER LIVING' EXPERIENCE EVERY DAY, ALL THE DAYS OF YOUR LIFE —</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HEALTH CALCULATORS ===== -->
+<section id="calculators" class="calc-section">
+  <div class="container">
+    <div class="section-header center fade-in">
+      <span class="tag" style="background:rgba(255,255,255,.15);color:#fff">Adventist Health Tools</span>
+      <h2 style="color:#fff;margin-top:1rem">Health Calculators</h2>
+      <div class="divider center"></div>
+      <p style="color:rgba(255,255,255,.7);max-width:560px;margin:0 auto">Based on the Better Living principles, use these free tools to understand your health and set meaningful goals.</p>
+    </div>
+
+    <div class="calc-grid fade-in">
+
+      <!-- BMI Calculator -->
+      <div class="calc-card">
+        <h3>BMI Calculator</h3>
+        <p class="calc-desc">Body Mass Index helps you understand if your weight is healthy for your height — a key part of Principle 3: Temperance &amp; Self-Control.</p>
+        <div class="form-group">
+          <label>Height (cm)</label>
+          <input type="number" id="bmiHeight" placeholder="e.g. 170" min="100" max="250">
+        </div>
+        <div class="form-group">
+          <label>Weight (kg)</label>
+          <input type="number" id="bmiWeight" placeholder="e.g. 70" min="20" max="300">
+        </div>
+        <button class="calc-btn" onclick="calcBMI()">Calculate BMI</button>
+        <div class="calc-result" id="bmiResult">
+          <div style="color:rgba(255,255,255,.4);font-size:.85rem">Your BMI result will appear here</div>
+        </div>
+        <div class="bmi-bar" id="bmiBar" style="display:none">
+          <div class="bmi-marker" id="bmiMarker"></div>
+        </div>
+      </div>
+
+      <!-- Daily Water Calculator -->
+      <div class="calc-card">
+        <h3>Daily Water Intake</h3>
+        <p class="calc-desc">Principle 7: Living Water. Calculate your recommended daily water intake based on body weight and activity level.</p>
+        <div class="form-group">
+          <label>Body Weight (kg)</label>
+          <input type="number" id="waterWeight" placeholder="e.g. 70" min="20" max="300">
+        </div>
+        <div class="form-group">
+          <label>Activity Level</label>
+          <select id="waterActivity">
+            <option value="1">Sedentary (little/no exercise)</option>
+            <option value="1.1">Lightly Active (1–3 days/week)</option>
+            <option value="1.2" selected>Moderately Active (3–5 days/week)</option>
+            <option value="1.35">Very Active (6–7 days/week)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Climate</label>
+          <select id="waterClimate">
+            <option value="0">Moderate</option>
+            <option value="0.5" selected>Hot / Namibian Climate</option>
+            <option value="0.3">Cool</option>
+          </select>
+        </div>
+        <button class="calc-btn" onclick="calcWater()">Calculate Daily Water</button>
+        <div class="calc-result" id="waterResult">
+          <div style="color:rgba(255,255,255,.4);font-size:.85rem">Your water intake recommendation will appear here</div>
+        </div>
+      </div>
+
+      <!-- Calorie Burn Calculator -->
+      <div class="calc-card">
+        <h3>Daily Calorie Burn</h3>
+        <p class="calc-desc">Principle 2: Exercise Daily. Find out how many calories you burn based on your activity, weight and duration.</p>
+        <div class="form-group">
+          <label>Your Weight (kg)</label>
+          <input type="number" id="calWeight" placeholder="e.g. 75" min="20" max="300">
+        </div>
+        <div class="form-group">
+          <label>Activity Type</label>
+          <select id="calActivity">
+            <option value="840">Squash / Field &amp; Track events</option>
+            <option value="700">Serious Running</option>
+            <option value="455">Soccer / Tennis / Jogging / Rugby</option>
+            <option value="420">Swimming / Home Cycle</option>
+            <option value="385">Home Gym / Aerobics</option>
+            <option value="350">Ball games / Roller skates</option>
+            <option value="315" selected>Brisk Walk / Volleyball / Table Tennis ⭐</option>
+            <option value="270">Garden work / Golf</option>
+            <option value="245">Children games / Fishing</option>
+            <option value="210">Housework / Walking</option>
+            <option value="175">Strolling</option>
+            <option value="140">Ironing / Cooking / Brushing teeth</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Duration (minutes)</label>
+          <input type="number" id="calDuration" placeholder="e.g. 45" min="5" max="300" value="45">
+        </div>
+        <button class="calc-btn" onclick="calcCalories()">Calculate Calories Burned</button>
+        <div class="calc-result" id="calResult">
+          <div style="color:rgba(255,255,255,.4);font-size:.85rem">Your calorie burn will appear here</div>
+        </div>
+      </div>
+
+      <!-- Ideal Body Weight -->
+      <div class="calc-card">
+        <h3>Ideal Body Weight</h3>
+        <p class="calc-desc">Based on Adventist health principles, find your healthy weight range for your height and frame size to guide your wellness goals.</p>
+        <div class="form-group">
+          <label>Height (cm)</label>
+          <input type="number" id="ibwHeight" placeholder="e.g. 170" min="100" max="250">
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="ibwGender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Frame Size</label>
+          <select id="ibwFrame">
+            <option value="small">Small Frame</option>
+            <option value="medium" selected>Medium Frame</option>
+            <option value="large">Large Frame</option>
+          </select>
+        </div>
+        <button class="calc-btn" onclick="calcIBW()">Calculate Ideal Weight</button>
+        <div class="calc-result" id="ibwResult">
+          <div style="color:rgba(255,255,255,.4);font-size:.85rem">Your ideal weight range will appear here</div>
+        </div>
+      </div>
+
+      <!-- Sleep Calculator -->
+      <div class="calc-card">
+        <h3>Sleep Time Calculator</h3>
+        <p class="calc-desc">Principle 6: Rest Sufficiently. Find your ideal bedtime or wake-up time based on 90-minute sleep cycles for optimal rest.</p>
+        <div class="form-group">
+          <label>I want to wake up at</label>
+          <input type="time" id="sleepWakeTime" value="06:00">
+        </div>
+        <div class="form-group">
+          <label>Sleep Cycles (recommended: 5–6)</label>
+          <select id="sleepCycles">
+            <option value="4">4 cycles (6 hours)</option>
+            <option value="5" selected>5 cycles (7.5 hours)</option>
+            <option value="6">6 cycles (9 hours)</option>
+          </select>
+        </div>
+        <button class="calc-btn" onclick="calcSleep()">Calculate Bedtime</button>
+        <div class="calc-result" id="sleepResult">
+          <div style="color:rgba(255,255,255,.4);font-size:.85rem">Your recommended bedtime will appear here</div>
+        </div>
+      </div>
+
+      <!-- Daily Health Check -->
+      <div class="calc-card">
+        <h3>Daily Better Living Score</h3>
+        <p class="calc-desc">How well are you following the 12 BETTER LIVING principles today? Check your daily health habits and get a score.</p>
+        <div style="max-height:240px;overflow-y:auto;padding-right:.5rem">
+          <div id="checklistItems"></div>
+        </div>
+        <button class="calc-btn" onclick="calcScore()" style="margin-top:1rem">Calculate My Score</button>
+        <div class="calc-result" id="scoreResult">
+          <div style="color:rgba(255,255,255,.4);font-size:.85rem">Tick your habits above then check your score</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <span class="tag tag-green">Get In Touch</span>
+        <h2 style="margin-top:1rem">Contact AHS Namibia</h2>
+        <div class="divider"></div>
+        <p style="color:var(--ink-light)">We are here to help you on your journey to a healthful life. Reach out to us for health expo information, community outreach, or personal health guidance.</p>
+
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:lsolomon@mweb.com.na">lsolomon@mweb.com.na</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value">061-211097 / 061-228140</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">WhatsApp</div>
+              <div class="contact-value"><a href="https://wa.me/264811271097">0811 271 097</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Location</div>
+              <div class="contact-value">Windhoek, Namibia</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/264811271097" target="_blank" class="wa-big">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <div>
+            <div style="font-size:.75rem;opacity:.8;font-weight:400">Chat with us on</div>
+            <div>WhatsApp: 0811 271 097</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="fade-in stagger-2">
+        <div class="newsletter-box">
+          <h3>Request a Health Expo</h3>
+          <div style="width:40px;height:3px;background:var(--yellow);border-radius:3px;margin:.5rem 0 1rem"></div>
+          <p>Would you like AHS Namibia to host a Health Expo at your church, school, community or workplace? Get in touch with us!</p>
+          <div class="newsletter-form">
+            <input type="text" placeholder="Your Full Name">
+            <input type="email" placeholder="Your Email Address">
+            <input type="tel" placeholder="Your Phone / WhatsApp Number">
+            <input type="text" placeholder="Your Organisation / Church / Community">
+            <button onclick="handleSubmit(this)">Send Request</button>
+          </div>
+        </div>
+
+        <div style="background:var(--cream);border-radius:16px;padding:2rem;margin-top:1.5rem">
+          <div class="vm-label">Non-Profit Organisation</div>
+          <h3 style="font-size:1.2rem;margin-bottom:.5rem">AHS Namibia — A Health For All Project</h3>
+          <p style="font-size:.88rem;color:var(--ink-light)">Adventist Health Services Namibia is a non-profit health ministry dedicated to sharing the 'BETTER LIVING' principles with every person in Namibia — free of charge. Our mission is your health.</p>
+          <div style="margin-top:1rem;display:flex;gap:.8rem;flex-wrap:wrap">
+            <span class="tag tag-green" style="font-size:.65rem">Non-Profit</span>
+            <span class="tag" style="background:var(--yellow);color:var(--ink);font-size:.65rem">Seventh-day Adventist</span>
+            <span class="tag" style="background:var(--cream-dark);color:var(--ink);font-size:.65rem">Windhoek, Namibia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand"><span>AHS</span>NAMIBIA</div>
+        <div class="footer-text">Adventist Health Services Namibia • A 'Health For All' Project</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#vision">Vision &amp; Mission</a></li>
+        <li><a href="#guide">Better Living Guide</a></li>
+        <li><a href="#principles">12 Principles</a></li>
+        <li><a href="#calculators">Calculators</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-note">
+      © Adventist Health Services Namibia • Non-Profit Health Ministry • lsolomon@mweb.com.na • 061-211097 / 061-228140 / 0811271097 • Windhoek, Namibia<br>
+      All content is taken from the official BETTER LIVING booklet by AHS Namibia. This website is for informational purposes only and does not replace professional medical advice.
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== MOBILE MENU =====
+document.getElementById('openMenu').addEventListener('click',()=>{
+  document.getElementById('mobileMenu').classList.add('open');
+  document.body.style.overflow='hidden';
+});
+document.getElementById('closeMenu').addEventListener('click',()=>closeMobileMenu());
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ===== SCROLL ANIMATIONS =====
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:0.12});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// ===== BMI CALCULATOR =====
+function calcBMI(){
+  const h=parseFloat(document.getElementById('bmiHeight').value);
+  const w=parseFloat(document.getElementById('bmiWeight').value);
+  if(!h||!w||h<100||w<20){alert('Please enter valid height and weight.');return;}
+  const bmi=w/((h/100)**2);
+  let cat='',color='',advice='',emoji='';
+  if(bmi<18.5){cat='Underweight';color='#60a5fa';emoji='⬇️';advice='Consider increasing caloric intake with healthy whole foods. Consult a health professional.';}
+  else if(bmi<25){cat='Normal weight';color='#4ade80';emoji='✅';advice='Excellent! Keep following the BETTER LIVING principles to maintain your healthy weight.';}
+  else if(bmi<30){cat='Overweight';color='#fbbf24';emoji='⚠️';advice='Focus on Principles 2 (Exercise), 5 (Eat Healthy) and 3 (Temperance). 30–45 min brisk walk daily.';}
+  else if(bmi<35){cat='Obese (Class I)';color='#f97316';emoji='🚨';advice='Please consult a health professional. Focus on diet, exercise and self-control principles.';}
+  else{cat='Obese (Class II+)';color='#ef4444';emoji='🆘';advice='Seek medical guidance immediately. Follow all 12 BETTER LIVING principles consistently.';}
+  const pct=Math.min(Math.max((bmi-15)/25*100,2),98);
+  document.getElementById('bmiResult').innerHTML=`
+    <div class="result-value" style="color:${color}">${bmi.toFixed(1)}</div>
+    <div class="result-label">${emoji} ${cat}</div>
+    <div class="result-detail">${advice}</div>
+    <div style="margin-top:.8rem;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.4rem">
+      <div class="rc-item" style="border-left:3px solid #60a5fa">Underweight<br><strong>&lt;18.5</strong></div>
+      <div class="rc-item" style="border-left:3px solid #4ade80">Normal<br><strong>18.5–24.9</strong></div>
+      <div class="rc-item" style="border-left:3px solid #fbbf24">Overweight<br><strong>25–29.9</strong></div>
+      <div class="rc-item" style="border-left:3px solid #ef4444">Obese<br><strong>≥30</strong></div>
+    </div>`;
+  const bar=document.getElementById('bmiBar');
+  const marker=document.getElementById('bmiMarker');
+  bar.style.display='block';
+  marker.style.display='block';
+  marker.style.left=pct+'%';
+}
+
+// ===== WATER CALCULATOR =====
+function calcWater(){
+  const w=parseFloat(document.getElementById('waterWeight').value);
+  const act=parseFloat(document.getElementById('waterActivity').value);
+  const climate=parseFloat(document.getElementById('waterClimate').value);
+  if(!w||w<20){alert('Please enter a valid weight.');return;}
+  const base=w*0.033;
+  const total=(base*act)+climate;
+  const glasses=Math.ceil(total/0.25);
+  const advice=total<2?'Increase your water intake gradually.':total<=3?'Great target! This aligns perfectly with Principle 7.':'Make sure to spread your water intake throughout the day.';
+  document.getElementById('waterResult').innerHTML=`
+    <div class="result-value">${total.toFixed(1)}L</div>
+    <div class="result-label">💧 ${glasses} glasses (250ml) per day</div>
+    <div class="result-detail">${advice}<br><br><em>AHS Namibia recommends 2–3 litres daily. Remember: fluids ½ hour before meals and 1 hour after meals.</em></div>`;
+}
+
+// ===== CALORIE BURN CALCULATOR =====
+function calcCalories(){
+  const w=parseFloat(document.getElementById('calWeight').value);
+  const kcalPerHr=parseFloat(document.getElementById('calActivity').value);
+  const mins=parseFloat(document.getElementById('calDuration').value);
+  if(!w||w<20||!mins||mins<1){alert('Please enter valid values.');return;}
+  // MET-based adjustment for body weight (standard is 70kg reference)
+  const met=kcalPerHr/70;
+  const burned=met*w*(mins/60);
+  const target=350;
+  const pct=Math.min(Math.round(burned/target*100),200);
+  let badge='',badgeColor='';
+  if(pct<50){badge='Keep going! Add more activity.';badgeColor='#f97316';}
+  else if(pct<80){badge='Good progress toward daily goal!';badgeColor='#fbbf24';}
+  else if(pct<=120){badge='🎯 Excellent! You met the daily target!';badgeColor='#4ade80';}
+  else{badge='Amazing! Great workout!';badgeColor='#60a5fa';}
+  document.getElementById('calResult').innerHTML=`
+    <div class="result-value" style="color:${badgeColor}">${Math.round(burned)} kcal</div>
+    <div class="result-label">${badge}</div>
+    <div class="result-detail">Daily target: 300–400 kcal. You achieved <strong>${pct}%</strong> of target.<br><em>AHS Namibia recommends 30–45 min Brisk Walking daily (315 kcal/hr).</em></div>`;
+}
+
+// ===== IDEAL BODY WEIGHT =====
+function calcIBW(){
+  const h=parseFloat(document.getElementById('ibwHeight').value);
+  const gender=document.getElementById('ibwGender').value;
+  const frame=document.getElementById('ibwFrame').value;
+  if(!h||h<100){alert('Please enter a valid height.');return;}
+  const hIn=h/2.54;
+  let base=gender==='male'?50+2.3*(hIn-60):45.5+2.3*(hIn-60);
+  base=Math.max(base,30);
+  const adj={small:-10,medium:0,large:10};
+  const ibw=base+(adj[frame]*base/100);
+  const low=(ibw-5).toFixed(1);
+  const high=(ibw+5).toFixed(1);
+  const bmiLow=(low/((h/100)**2)).toFixed(1);
+  const bmiHigh=(high/((h/100)**2)).toFixed(1);
+  document.getElementById('ibwResult').innerHTML=`
+    <div class="result-value">${low} – ${high} kg</div>
+    <div class="result-label">Ideal weight range for your height &amp; frame</div>
+    <div class="result-detail">This corresponds to a BMI of ${bmiLow}–${bmiHigh}.<br><em>Focus on Principle 3 (Temperance) and Principle 5 (Eat Healthy) to achieve your ideal weight.</em></div>`;
+}
+
+// ===== SLEEP CALCULATOR =====
+function calcSleep(){
+  const wake=document.getElementById('sleepWakeTime').value;
+  const cycles=parseInt(document.getElementById('sleepCycles').value);
+  if(!wake){alert('Please enter a wake-up time.');return;}
+  const [wh,wm]=wake.split(':').map(Number);
+  const wakeTotal=wh*60+wm;
+  const sleepMins=cycles*90+14; // 14 min to fall asleep
+  let bedTotal=wakeTotal-sleepMins;
+  if(bedTotal<0)bedTotal+=24*60;
+  const bh=Math.floor(bedTotal/60)%24;
+  const bm=bedTotal%60;
+  const fmt=(h,m)=>`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`;
+  const dur=(cycles*90/60).toFixed(1);
+  document.getElementById('sleepResult').innerHTML=`
+    <div class="result-value">${fmt(bh,bm)}</div>
+    <div class="result-label">🌙 Recommended bedtime to wake at ${wake}</div>
+    <div class="result-detail">Sleep duration: <strong>${dur} hours</strong> (${cycles} cycles of 90 min).<br><em>AHS Namibia recommends 6–8 hours per night. Read God's Word and pray before sleeping for the best rest (Principle 6).</em></div>`;
+}
+
+// ===== DAILY SCORE =====
+const habits=[
+  {l:'B',text:'Did 3-minute Deep Breathing exercises (morning &amp; evening)?'},
+  {l:'E',text:'Did 30–45 min Brisk Walking or exercise today?'},
+  {l:'T',text:'Exercised self-control — avoided harmful foods, substances or behaviours?'},
+  {l:'T',text:'Maintained a Thankful, positive attitude today?'},
+  {l:'E',text:'Ate a good Breakfast and avoided junk food?'},
+  {l:'R',text:'Had or planning 6–8 hours of sleep tonight?'},
+  {l:'L',text:'Drank 2–3 litres of clean water today?'},
+  {l:'I',text:'Started the day with prayer and Bible reading?'},
+  {l:'V',text:'Worked toward your health or life goals today?'},
+  {l:'I',text:'Got 10–15 minutes of direct sunlight today?'},
+  {l:'N',text:'Followed a nutritional, balanced, high-fibre diet today?'},
+  {l:'G',text:'Made God the centre of your decisions and plans today?'},
+];
+const checklistEl=document.getElementById('checklistItems');
+habits.forEach((h,i)=>{
+  checklistEl.innerHTML+=`
+    <label style="display:flex;align-items:flex-start;gap:.7rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer;font-size:.82rem">
+      <input type="checkbox" id="habit${i}" style="margin-top:.2rem;accent-color:var(--yellow);width:16px;height:16px;flex-shrink:0">
+      <span><strong style="color:var(--yellow)">${h.l}</strong> — ${h.text}</span>
+    </label>`;
+});
+function calcScore(){
+  let score=0;
+  habits.forEach((_,i)=>{if(document.getElementById('habit'+i).checked)score++;});
+  const pct=Math.round(score/habits.length*100);
+  let msg='',color='';
+  if(pct<30){msg='Just starting — every small step counts! Read through the 12 principles again.';color='#f97316';}
+  else if(pct<60){msg='Good start! Keep building these habits daily. Stay consistent!';color='#fbbf24';}
+  else if(pct<85){msg='Well done! You are living the BETTER LIVING principles consistently!';color='#4ade80';}
+  else{msg='🎉 Outstanding! You are a true BETTER LIVING champion!';color='#60a5fa';}
+  document.getElementById('scoreResult').innerHTML=`
+    <div class="result-value" style="color:${color}">${score}/12</div>
+    <div class="result-label">${pct}% of 12 BETTER LIVING principles followed today</div>
+    <div class="result-detail" style="margin-top:.5rem">${msg}</div>`;
+}
+
+// ===== CONTACT FORM =====
+function handleSubmit(btn){
+  const name=btn.closest('.newsletter-form').querySelector('input[type=text]').value;
+  if(!name){alert('Please enter your name.');return;}
+  btn.textContent='✅ Request Sent!';
+  btn.style.background='#4ade80';
+  btn.disabled=true;
+  setTimeout(()=>{btn.textContent='Send Request';btn.style.background='';btn.disabled=false;},4000);
+}
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>
